@@ -26,14 +26,21 @@ class GridSort {
     public:
     string sort(int n, int m, vector <int> grid) {
         if (n == 1) return "Possible";
-        int a[m];
-        fill(a, a + m, -1);
         REP(i, n) {
+            set<int> sd;
             REP(j, m) {
-                int val = grid[i * m + j] % m;
-                if (a[j] < 0) a[j] = val;
-                else if (a[j] != val) return "Impossible";
+                int val = (grid[i * m + j] - 1) / m;
+                sd.insert(val);
             }
+            if (SIZE(sd) != 1) return "Impossible";
+        }
+        REP(i, m) {
+            set<int> sr;
+            REP(j, n) {
+                int val = grid[j * m + i] % m;
+                sr.insert(val);
+            }
+            if (SIZE(sr) != 1) return "Impossible";
         }
         return "Possible";
     }
