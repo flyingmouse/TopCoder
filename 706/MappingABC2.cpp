@@ -40,6 +40,7 @@ class MappingABC2 {
         vector<int> a;
         int mask[55], ans = 0;
         REP(i, n) REPP(j, i + 1, n) REPP(k, j + 1, n) {
+            memset(mask, 0, sizeof(mask));
             REP(l, n) mask[t[l]] = 7;
             REP(l, n) {
                 if (l < i) mask[t[l]] &= 6;
