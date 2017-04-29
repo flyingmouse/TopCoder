@@ -45,12 +45,12 @@ class StepsConstruct {
         REP(i, n) REP(j, m) a[i][j] = (board[i][j] == '#');
         if (a[0][0]) return "";
         h[0][0][0] = '.';
-        REP(i, K) REP(j, n) REP(k, m) {
-            if (h[i][j][k]) {
+        REP(k, K) REP(i, n) REP(j, m) {
+            if (h[k][i][j]) {
                 REP(d, 4) {
-                    int tx = j + dx[d], ty = k + dy[d];
+                    int tx = i + dx[d], ty = j + dy[d];
                     if (can(tx, ty)) {
-                        h[i + 1][tx][ty] = dir[d];
+                        h[k + 1][tx][ty] = dir[d];
                     }
                 }
             }
