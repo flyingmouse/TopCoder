@@ -8,9 +8,9 @@ public class RemovingParenthesis {
         for (int i = 0; i < n; i++) {
             if (s.charAt(i) == '(') cnt++;
             else cnt--;
-            if (cnt < 0) return false;
+            if (cnt < 0) break;
         }
-        return true;
+        return cnt == 0;
     }
 
     int count(String s) {
