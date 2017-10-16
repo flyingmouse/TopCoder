@@ -25,32 +25,27 @@ typedef pair<int, int> pii;
 
 class TCPhoneHome {
     public:
-    ll pow(int n) {
-        ll res = 1;
-        while (n--) res *= 10;
-        return res;
-    }
-
-    bool isPart(string a, string b) {
-        // if a is a part of b
-        if (a.size() >= b.size()) return false;
-        int n = a.size();
-        REP(i, n) if (a[i] != b[i]) return false;
-        return true;
-    }
-
-    long long validNumbers(int digits, vector <string> specialPrefixes) {
-        ll ans = pow(digits);
-        sort(ALL(specialPrefixes));
+    long long validNumbers(int digits, vector <string> prefixes) {
+        ll pow[20];
+        pow[0] = 1;
+        REP(i, 18) pow[i + 1] = pow[i] * 10;
+        ll ans = pow[digits];
+        sort(ALL(prefixes));
         vector<string> useful;
-        string prev = specialPrefixes.empty() ? "" : specialPrefixes[0];
-        for (auto v : specialPrefixes) {
-            if (isPart(prev, v)) continue;
-            useful.push_back(v);
-            prev = v;
+        REP(i, prefixes.size()) {
+            bool ok = true;
+            REP(j, i) {
+                if (prefixes[j].size() < prefixes[i].size() &&
+                    prefixes[i].substr(0, prefixes[j].size()) == prefixes[j]) {
+                    ok = false;
+                    break;
+                }
+            }
+            if (ok)
+                useful.push_back(prefixes[i]);
         }
         for (auto v : useful)
-            ans -= pow(digits - v.size());
+            ans -= pow[digits - v.size()];
         return ans;
     }
 };
