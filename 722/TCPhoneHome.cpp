@@ -31,7 +31,6 @@ class TCPhoneHome {
         REP(i, 18) pow[i + 1] = pow[i] * 10;
         ll ans = pow[digits];
         sort(ALL(prefixes));
-        vector<string> useful;
         REP(i, prefixes.size()) {
             bool ok = true;
             REP(j, i) {
@@ -42,10 +41,8 @@ class TCPhoneHome {
                 }
             }
             if (ok)
-                useful.push_back(prefixes[i]);
+                ans -= pow[digits - prefixes[i].size()];
         }
-        for (auto v : useful)
-            ans -= pow[digits - v.size()];
         return ans;
     }
 };
